@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import { Canvas } from "@react-three/fiber";
-import { ContactShadows } from "@react-three/drei";
+import { ContactShadows, OrbitControls } from "@react-three/drei";
 // import { Physics } from "@react-three/cannon";
 
 import RoomPlane from "../../models/RoomPlane";
@@ -16,6 +16,7 @@ const RoomLayout = styled.div`
 `;
 
 function Room() {
+  const [isDragging, setIsDragging] = useState(false);
   // flat linear
   return (
     <RoomLayout>
@@ -29,7 +30,7 @@ function Room() {
         />
         <directionalLight intensity={1} />
         <ambientLight intensity={1} />
-        {/* <OrbitControls /> */}
+        <OrbitControls enabled={!isDragging} />
         <ContactShadows
           position={[0, -0.8, 0]}
           opacity={0.5}
@@ -42,7 +43,7 @@ function Room() {
         <RoomPlane position={[-1, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} />
         {/* <RoomWall position={[-10, 5, 0]} rotation={[0, Math.PI / 2, 0]} />
           <RoomWall position={[0, 5, -10]} rotation={[0, 0, 0]} /> */}
-        <Box />
+        <Box setIsDragging={setIsDragging} />
         {/* </Physics> */}
       </Canvas>
     </RoomLayout>
