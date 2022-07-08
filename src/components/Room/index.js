@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import { Canvas } from "@react-three/fiber";
-import { ContactShadows, OrbitControls } from "@react-three/drei";
-import { Physics } from "@react-three/cannon";
+import { ContactShadows } from "@react-three/drei";
+// import { Physics } from "@react-three/cannon";
 
 import RoomPlane from "../../models/RoomPlane";
 // import RoomWall from "./RoomWall";
-// import Box from "../../models/Box";
+import Box from "../../models/Box";
 import Model from "../../models/Model";
 
 const RoomLayout = styled.div`
@@ -29,7 +29,7 @@ function Room() {
         />
         <directionalLight intensity={1} />
         <ambientLight intensity={1} />
-        <OrbitControls />
+        {/* <OrbitControls /> */}
         <ContactShadows
           position={[0, -0.8, 0]}
           opacity={0.5}
@@ -37,13 +37,13 @@ function Room() {
           blur={1.5}
           far={0.8}
         />
-        <Physics gravity={[0, -9.8, 0]}>
-          <RoomPlane position={[-1, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-          {/* <RoomWall position={[-10, 5, 0]} rotation={[0, Math.PI / 2, 0]} />
+        {/* <Physics gravity={[0, -9.8, 0]}> */}
+        <Model position={[-1, 0, 0]} />
+        <RoomPlane position={[-1, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+        {/* <RoomWall position={[-10, 5, 0]} rotation={[0, Math.PI / 2, 0]} />
           <RoomWall position={[0, 5, -10]} rotation={[0, 0, 0]} /> */}
-          <Model position={[-1, 0, 0]} />
-          {/* <Box /> */}
-        </Physics>
+        <Box />
+        {/* </Physics> */}
       </Canvas>
     </RoomLayout>
   );
