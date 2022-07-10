@@ -2,8 +2,8 @@ import React from "react";
 
 import Container from "@mui/material/Container";
 
-import AppContents from "../../AppContents";
-import AppNavBar from "../../AppNavBar";
+import AppContents from "../AppContents";
+import AppNavBar from "../AppNavBar";
 
 function Plan() {
   return (

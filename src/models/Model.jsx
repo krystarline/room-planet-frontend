@@ -3,12 +3,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect, useRef } from "react";
-
+import { useAtom } from "jotai";
 import { useGLTF } from "@react-three/drei";
+
+import { modelsAtom } from "../common/atom";
 
 function Model({ file, ...props }) {
   const group = useRef();
   const { nodes } = useGLTF("Modern_TV_Rack-01.gltf");
+  const [, setModels] = useAtom(modelsAtom);
+  // const { nodes } = useGLTF(file);
 
   const [hover, setHover] = useState(false);
   // const [active, setActive] = useState(false);
@@ -24,12 +28,17 @@ function Model({ file, ...props }) {
   //   group.current.position.y = (1 + Math.sin(t / 1.5)) / 10;
   // });
 
+  const handleOnDoubleClick = () => {
+    setModels((prev) => [...prev, "modernTvRack"]);
+  };
+
   return (
     <group
       ref={group}
       dispose={null}
       onPointerOver={() => setHover(!hover)}
       onPointerOut={() => setHover(hover)}
+      onDoubleClick={handleOnDoubleClick}
       {...props}
       // scale={active ? 1.5 : 1}
       // onDoubleClick={() => setActive(!active)}

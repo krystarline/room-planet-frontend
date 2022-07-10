@@ -12,7 +12,7 @@ import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
 import { Physics } from "@react-three/cannon";
 
-import { modelsAtom } from "../../common/atom";
+import { modelsAtom } from "../common/atom";
 
 const ModelCanvasLayout = styled.div`
   height: 20vh;

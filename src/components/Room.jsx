@@ -8,11 +8,11 @@ import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls, Sky } from "@react-three/drei";
 import { Physics } from "@react-three/cannon";
 
-import RoomPlane from "../../models/RoomPlane";
-import Bedroom from "../../models/Bedroom";
-import Chair from "../../models/Chair";
+import RoomPlane from "../models/RoomPlane";
+import Bedroom from "../models/Bedroom";
+import Chair from "../models/Chair";
 
-import { modelsAtom } from "../../common/atom";
+import { modelsAtom } from "../common/atom";
 
 const RoomLayout = styled.div`
   height: 60vh;

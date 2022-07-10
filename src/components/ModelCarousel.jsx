@@ -6,9 +6,9 @@ import { useAtom } from "jotai";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 
-import { modelsAtom } from "../../common/atom";
-import ModelCanvas from "../ModelCanvas/index";
-import Chair from "../../models/Chair";
+import { modelsAtom } from "../common/atom";
+import ModelCanvas from "./ModelCanvas";
+import Chair from "../models/Chair";
 
 import "react-multi-carousel/lib/styles.css";
 

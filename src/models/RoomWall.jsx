@@ -11,8 +11,8 @@ function RoomWall(props) {
   return (
     <group ref={ref}>
       <mesh receiveShadow>
-        <planeGeometry args={[20, 10]} />
-        <meshStandardMaterial color="beige" />
+        <planeGeometry args={[10, 5]} />
+        <meshStandardMaterial color="brown" />
       </mesh>
     </group>
   );
