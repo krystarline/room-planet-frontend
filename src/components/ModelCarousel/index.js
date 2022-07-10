@@ -1,105 +1,71 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
-import React, { Fragment, useState } from "react";
+import React, { Suspense } from "react";
+import { useAtom } from "jotai";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
+
+import { modelsAtom } from "../../common/atom";
+import ModelCanvas from "../ModelCanvas/index";
+import Chair from "../../models/Chair";
+
 import "react-multi-carousel/lib/styles.css";
 
-import ModelCanvas from "../ModelCanvas/index";
-
-// import { Canvas } from "@react-three/fiber";
-// import { PhysicsProvider } from "@react-three/cannon/dist/physics-provider";
-
-// import Box from "./Box";
+const responsive = {
+  superLargeDesktop: {
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 const ModelCarouselLayout = styled.div`
   height: 20vh;
   overflow: hidden;
 `;
 
-// const CustomDot = styled(Carousel)`
-//   .showDots li button {
-//     // <CustomDot />
-//     background-color: rgb(139, 0, 0);
-//   }
-// `;
-
-// function CustomRightArrow({ onClick, ...rest }) {
-//   const {
-//     onMove,
-//     carouselState: { currentSlide, deviceType },
-//   } = rest;
-
-//   return <button onClick={() => onClick()} />;
-// }
-
 function ModelCarousel() {
-  // const [models, setModels] = useState([
-  //   "Modern_TV_Rack-01.gltf",
-  //   "Modern_TV_Rack-01.gltf",
-  //   "Modern_TV_Rack-01.gltf",
-  // ]);
-  // const [models, setModels] = useAtom(modelsAtom);
-
-  // console.log(`ModelCarousel: '${models}' Type: ${typeof models}`);
-
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
+  const [models] = useAtom(modelsAtom);
 
   return (
     <ModelCarouselLayout>
-      {/* <CarouselWrapper> */}
       <Carousel
         responsive={responsive}
         autoPlay="true"
         autoPlaySpeed={2000}
-        showDots="true"
-        // customRightArrow={<CustomRightArrow />}
+        showDots
       >
-        {/* <Suspense fallback={null}> */}
-        {/* {models.map((file, index) => (
-          <Fragment key={index}>
-            <ModelCanvas file={file} />
-          </Fragment>
-        ))} */}
-        <div>
-          <ModelCanvas />
-        </div>
-        <div>
-          <ModelCanvas />
-        </div>
-        <div>
-          <ModelCanvas />
-        </div>
-        <div>
-          <ModelCanvas />
-        </div>
-        <div>
-          <ModelCanvas />
-        </div>
-        <div>
-          <ModelCanvas />
-        </div>
-        {/* </Suspense> */}
+        {models.map((model, index) => (
+          <div key={index}>
+            <Suspense fallback={null}>
+              <ModelCanvas index={index}>
+                <Chair type="Static" />
+              </ModelCanvas>
+            </Suspense>
+          </div>
+        ))}
+        {/* <Suspense fallback={null}>
+          <ModelCanvas>
+            <Chair onDoubleClick={handleOnDoubleClick} />
+          </ModelCanvas>
+          <div>침대</div>
+          <div>책상</div>
+          <div>옷장</div>
+          <div>테이블</div>
+        </Suspense> */}
       </Carousel>
-      {/* </CarouselWrapper> */}
     </ModelCarouselLayout>
   );
 }

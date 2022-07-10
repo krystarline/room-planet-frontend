@@ -1,61 +1,62 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable react/prop-types */
-import React, { useState, Suspense } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useAtom } from "jotai";
 
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
+import { Physics } from "@react-three/cannon";
 
-// import { Physics } from "@react-three/cannon";
-
-// import RoomPlane from "./RoomPlane";
-import Model from "../../models/Model";
-// import Box from "./Box";
+import { modelsAtom } from "../../common/atom";
 
 const ModelCanvasLayout = styled.div`
   height: 20vh;
   overflow: hidden;
 `;
 
-function ModelCanvas({ file }) {
-  const [isShown, setIsShown] = useState(false);
-  // const [models, setModels] = useState([]);
-  const handleOnClick = () => {
-    setIsShown(true);
+function ModelCanvas({ children, index }) {
+  const [models, setModels] = useAtom(modelsAtom);
+  const handleOnDoubleClick = () => {
+    // e.stopPropagation();
+    setModels((ms) => {
+      ms[index] = !ms[index];
+      return [...ms];
+    });
   };
+
+  useEffect(() => {
+    console.log(`ModelCanvas: useEffect: modelAtom: ${models}`);
+  });
 
   return (
     <ModelCanvasLayout>
-      <Canvas camera={{ fov: 10, position: [20, 15, 25] }}>
-        <pointLight
-          intensity={1.5}
-          angle={0.1}
-          penumbra={1}
-          position={[10, 15, 10]}
-          castShadow
-        />
-        <directionalLight intensity={1} />
-        <ambientLight intensity={1} />
-        <OrbitControls />
-        <ContactShadows
-          position={[0, -0.8, 0]}
-          opacity={0.5}
-          scale={10}
-          blur={1.5}
-          far={0.8}
-        />
-        {/* <Physics gravity={[0, -9.8, 0]}>
-          <RoomPlane position={[-1, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} /> */}
-        <Suspense fallback={null}>
-          <Model
-            position={[-1, 0, 0]}
-            file={file}
-            value={isShown}
-            onDoubleClick={handleOnClick}
+      <div onDoubleClick={handleOnDoubleClick}>
+        <Canvas camera={{ fov: 23, position: [10, 2, 10] }}>
+          <pointLight
+            intensity={1.5}
+            angle={0.1}
+            penumbra={1}
+            position={[10, 15, 10]}
+            castShadow
           />
-        </Suspense>
-        {/* <Box />
-        </Physics> */}
-      </Canvas>
+          <directionalLight intensity={1} />
+          <ambientLight intensity={1} />
+          <OrbitControls />
+          <ContactShadows
+            position={[0, -0.8, 0]}
+            opacity={0.5}
+            scale={10}
+            blur={1.5}
+            far={0.8}
+          />
+          <Physics gravity={[0, -9.8, 0]}>{children}</Physics>
+        </Canvas>
+      </div>
     </ModelCanvasLayout>
   );
 }
