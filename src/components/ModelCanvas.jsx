@@ -20,18 +20,13 @@ const ModelCanvasLayout = styled.div`
 `;
 
 function ModelCanvas({ children, index }) {
-  const [models, setModels] = useAtom(modelsAtom);
+  const [, setModels] = useAtom(modelsAtom);
   const handleOnDoubleClick = () => {
-    // e.stopPropagation();
-    setModels((ms) => {
-      ms[index] = !ms[index];
-      return [...ms];
+    setModels((prevModels) => {
+      prevModels[index] = !prevModels[index];
+      return [...prevModels];
     });
   };
-
-  useEffect(() => {
-    console.log(`ModelCanvas: useEffect: modelAtom: ${models}`);
-  });
 
   return (
     <ModelCanvasLayout>
@@ -46,7 +41,6 @@ function ModelCanvas({ children, index }) {
           />
           <directionalLight intensity={1} />
           <ambientLight intensity={1} />
-          <OrbitControls />
           <ContactShadows
             position={[0, -0.8, 0]}
             opacity={0.5}
@@ -54,6 +48,7 @@ function ModelCanvas({ children, index }) {
             blur={1.5}
             far={0.8}
           />
+          <OrbitControls />
           <Physics gravity={[0, -9.8, 0]}>{children}</Physics>
         </Canvas>
       </div>

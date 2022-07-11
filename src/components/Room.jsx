@@ -1,18 +1,27 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import styled from "styled-components";
 import { useAtom } from "jotai";
 
 import { Canvas } from "@react-three/fiber";
-import { ContactShadows, OrbitControls, Sky } from "@react-three/drei";
+import {
+  Html,
+  ContactShadows,
+  OrbitControls,
+  Sky,
+  useContextBridge,
+} from "@react-three/drei";
 import { Physics } from "@react-three/cannon";
 
-import RoomPlane from "../models/RoomPlane";
 import Bedroom from "../models/Bedroom";
+import RoomPlane from "../models/RoomPlane";
+import Bed from "../models/Bed";
 import Chair from "../models/Chair";
+import Picker from "./Picker";
 
-import { modelsAtom } from "../common/atom";
+import { colorAtom, modelsAtom } from "../common/atom";
 
 const RoomLayout = styled.div`
   height: 60vh;
@@ -21,53 +30,68 @@ const RoomLayout = styled.div`
 
 function Room() {
   const [isDragging, setIsDragging] = useState(false);
-  const [models, setModels] = useAtom(modelsAtom);
-
-  useEffect(() => {
-    console.log(`Room: useEffect`);
-    console.log(models);
-  });
+  const [models] = useAtom(modelsAtom);
+  const [color, setColor] = useAtom(colorAtom);
+  const ContextBridge = useContextBridge();
 
   return (
     <RoomLayout>
-      <Canvas camera={{ fov: 18, position: [30, 15, 30] }}>
-        <Sky sunPosition={[0, 0.2, 0]} />
-        <pointLight
-          intensity={1.5}
-          angle={0.1}
-          penumbra={1}
-          position={[10, 15, 10]}
-          castShadow
-        />
-        <directionalLight intensity={0.5} />
-        <ambientLight intensity={1} />
-        <OrbitControls enabled={!isDragging} />
-        <ContactShadows
-          position={[0, -0.8, 0]}
-          opacity={0.5}
-          scale={10}
-          blur={1.5}
-          far={0.8}
-        />
-        <Physics gravity={[0, -9.8, 0]}>
-          <RoomPlane position={[0, 0.3, 0]} rotation={[-Math.PI / 2, 0, 0]} />
-          {/*
+      <Canvas camera={{ fov: 13, position: [30, 30, 50] }}>
+        <ContextBridge>
+          <Sky sunPosition={[0, 0.2, 0]} />
+          <pointLight
+            intensity={1.5}
+            angle={0.1}
+            penumbra={1}
+            position={[10, 15, 10]}
+            castShadow
+          />
+          <directionalLight intensity={0.5} />
+          <ambientLight intensity={1} />
+          <OrbitControls enabled={!isDragging} />
+          <ContactShadows
+            position={[0, -0.8, 0]}
+            opacity={0.5}
+            scale={10}
+            blur={1.5}
+            far={0.8}
+          />
+          <Physics gravity={[0, -9.8, 0]}>
+            <Bedroom rotation={[0, -Math.PI / 2, 0]} />
+            <RoomPlane position={[0, 0.3, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+            {/*
             <RoomWall position={[-10, 5, 0]} rotation={[0, Math.PI / 2, 0]} />
             <RoomWall position={[0, 5, -10]} rotation={[0, 0, 0]} />
             <Box />
           */}
-          {/* <Chair /> */}
-          {models.map(
-            (model, index) =>
-              model &&
-              index === 0 && (
-                <Fragment key={index}>
-                  <Chair type="Dynamic" />
-                </Fragment>
-              )
-          )}
-          <Bedroom rotation={[0, -Math.PI / 2, 0]} />
-        </Physics>
+            {models.map(
+              (model, index) =>
+                model &&
+                index === 0 && (
+                  <Fragment key={index}>
+                    <Chair
+                      type="Dynamic"
+                      onPointerDown={(e) => {
+                        e.stopPropagation();
+                        setColor((prev) => ({
+                          ...prev,
+                          current: {
+                            index,
+                            name: e.object.name,
+                          },
+                        }));
+                      }}
+                      onPointerMissed={() =>
+                        setColor((prev) => ({ ...prev, current: null }))
+                      }
+                    />
+                  </Fragment>
+                )
+            )}
+            {/* <Bed /> */}
+          </Physics>
+          <Html position={[5, 5, 5]}>{color.current && <Picker />}</Html>
+        </ContextBridge>
       </Canvas>
     </RoomLayout>
   );
