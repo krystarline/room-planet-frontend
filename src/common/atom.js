@@ -9,8 +9,14 @@ const colorProxy = proxy({
       "Ottoman wood": "#ffffff",
       "Ottoman fabric": "#ffffff",
     },
+    {
+      Frame: "#acd",
+      White: "#eec",
+      Pillow: "#ffa",
+      Blanket: "#ffd",
+    },
   ],
 });
 
-export const modelsAtom = atom([true, false, false]);
+export const modelsAtom = atom([false, false, false, false]);
 export const colorAtom = atomWithProxy(colorProxy, { sync: true });

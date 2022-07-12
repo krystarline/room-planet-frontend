@@ -8,7 +8,9 @@ import Carousel from "react-multi-carousel";
 
 import { modelsAtom } from "../common/atom";
 import ModelCanvas from "./ModelCanvas";
+
 import Chair from "../models/Chair";
+import Bed from "../models/Bed";
 
 import "react-multi-carousel/lib/styles.css";
 
@@ -48,15 +50,29 @@ function ModelCarousel() {
         infinite
         showDots
       >
-        {models.map((model, index) => (
+        {/* {models.map((model, index) => (
           <div key={index}>
             <Suspense fallback={null}>
               <ModelCanvas index={index}>
-                <Chair type="Static" />
+                <Chair />
               </ModelCanvas>
             </Suspense>
           </div>
-        ))}
+        ))} */}
+        <div>
+          <Suspense fallback={null}>
+            <ModelCanvas index={0}>
+              <Chair />
+            </ModelCanvas>
+          </Suspense>
+        </div>
+        <div>
+          <Suspense fallback={null}>
+            <ModelCanvas index={1}>
+              <Bed />
+            </ModelCanvas>
+          </Suspense>
+        </div>
         {/* <Suspense fallback={null}>
           <ModelCanvas>
             <Chair onDoubleClick={handleOnDoubleClick} />

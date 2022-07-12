@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { HexColorPicker } from "react-colorful";
 import { useAtom } from "jotai";
 
@@ -8,9 +8,6 @@ import { colorAtom } from "../common/atom";
 function Picker() {
   const [{ current, items }, setColor] = useAtom(colorAtom);
 
-  const handleClick = (e) => {
-    e.stopPropagation();
-  };
   const handleColorChange = (c) => {
     setColor(({ current: prevCurrent, items: prevItems }) => {
       const { index, name } = prevCurrent;
@@ -36,8 +33,7 @@ function Picker() {
       <h2>{current?.name}</h2>
       <HexColorPicker
         className="picker"
-        color={items?.[current.index]?.[current.name]}
-        onClick={handleClick}
+        color={items?.[current?.index]?.[current?.name]}
         onChange={handleColorChange}
       />
     </>
