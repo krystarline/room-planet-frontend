@@ -19,6 +19,7 @@
     "html2canvas": "^1.4.1",
     "jotai": "^1.7.3",
     "react": "^18.2.0",
+    "react-beforeunload": "^2.5.3",
     "react-colorful": "^5.5.1",
     "react-dom": "^18.2.0",
     "react-multi-carousel": "^2.8.2",
