@@ -43,8 +43,9 @@ function ModelCarousel() {
     <ModelCarouselLayout>
       <Carousel
         responsive={responsive}
-        autoPlay="true"
-        autoPlaySpeed={2000}
+        // autoPlay="true"
+        // autoPlaySpeed={2000}
+        infinite
         showDots
       >
         {models.map((model, index) => (

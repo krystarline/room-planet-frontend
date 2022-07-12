@@ -8,6 +8,8 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ChairIcon from "@mui/icons-material/Chair";
 
+import PlanGuide from "./components/PlanGuide";
+
 function AppNavBar() {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -25,6 +27,7 @@ function AppNavBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Room Planet
           </Typography>
+          <PlanGuide />
           <IconButton
             size="large"
             edge="start"
