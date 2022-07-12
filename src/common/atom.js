@@ -1,10 +1,8 @@
-/* eslint-disable camelcase */
-/* eslint-disable import/prefer-default-export */
-import { atom, unstable_createStore } from "jotai";
+import { atom } from "jotai";
+import { atomWithProxy } from "jotai/valtio";
+import { proxy } from "valtio/vanilla";
 
-export const store = unstable_createStore();
-export const modelsAtom = atom([false, false, false]);
-export const colorAtom = atom({
+const colorProxy = proxy({
   current: null,
   items: [
     {
@@ -13,3 +11,6 @@ export const colorAtom = atom({
     },
   ],
 });
+
+export const modelsAtom = atom([true, false, false]);
+export const colorAtom = atomWithProxy(colorProxy, { sync: true });

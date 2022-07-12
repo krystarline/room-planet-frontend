@@ -1,25 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { useAtom } from "jotai";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from "react";
 import { HexColorPicker } from "react-colorful";
+import { useAtom } from "jotai";
 
 import { colorAtom } from "../common/atom";
 
 function Picker() {
-  const [color, setColor] = useState("#ffffff");
-  const [{ current }] = useAtom(colorAtom);
+  const [{ current, items }, setColor] = useAtom(colorAtom);
 
-  useEffect(() => {
-    console.log(color);
-  });
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
+  const handleColorChange = (c) => {
+    setColor(({ current: prevCurrent, items: prevItems }) => {
+      const { index, name } = prevCurrent;
+      const newItems = prevItems.map((item, i) => {
+        if (index === i) {
+          return {
+            ...prevItems[index],
+            [name]: c,
+          };
+        }
+
+        return item;
+      });
+      return {
+        current: prevCurrent,
+        items: newItems,
+      };
+    });
+  };
 
   return (
     <>
-      <h2>{current.name}</h2>
+      <h2>{current?.name}</h2>
       <HexColorPicker
         className="picker"
-        color={color}
-        onClick={(e) => e.stopPropagation()}
-        onChange={(c) => setColor(c)}
+        color={items?.[current.index]?.[current.name]}
+        onClick={handleClick}
+        onChange={handleColorChange}
       />
     </>
   );
