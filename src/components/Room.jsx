@@ -35,8 +35,11 @@ function Room() {
   const ContextBridge = useContextBridge();
 
   return (
-    <RoomLayout>
-      <Canvas camera={{ fov: 13, position: [30, 30, 50] }}>
+    <RoomLayout id="room-canvas">
+      <Canvas
+        camera={{ fov: 13, position: [30, 30, 50] }}
+        gl={{ preserveDrawingBuffer: true }}
+      >
         <ContextBridge>
           <Sky sunPosition={[0, 0.2, 0]} />
           <pointLight

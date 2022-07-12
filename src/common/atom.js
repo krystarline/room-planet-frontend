@@ -3,7 +3,7 @@
 import { atom, unstable_createStore } from "jotai";
 
 export const store = unstable_createStore();
-export const modelsAtom = atom([false, false, false, false, false]);
+export const modelsAtom = atom([false, false, false]);
 export const colorAtom = atom({
   current: null,
   items: [

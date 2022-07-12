@@ -61,6 +61,7 @@ function PlanGuide() {
         size="large"
         edge="start"
         color="default"
+        aria-label="planguide-modal"
         sx={{ mr: 2 }}
         onClick={handleOpen}
       >
