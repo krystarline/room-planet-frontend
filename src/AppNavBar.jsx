@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useCallback } from "react";
 
-import Box from "@mui/material/Box";
+import { Container } from "@mui/material";
+// import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -23,9 +24,10 @@ function AppNavBar() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+    // <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="static">
+      <Container fixed disableGutters>
+        <Toolbar disableGutters>
           <IconButton
             size="large"
             edge="start"
@@ -59,8 +61,9 @@ function AppNavBar() {
             <ArrowBackIcon />
           </IconButton>
         </Toolbar>
-      </AppBar>
-    </Box>
+      </Container>
+    </AppBar>
+    // </Box>
   );
 }
 

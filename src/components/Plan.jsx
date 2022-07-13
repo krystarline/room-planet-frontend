@@ -1,7 +1,5 @@
 /* eslint-disable import/no-useless-path-segments */
 import React from "react";
-
-import Container from "@mui/material/Container";
 import { useBeforeunload } from "react-beforeunload";
 
 import AppContents from "../AppContents";
@@ -11,10 +9,10 @@ function Plan() {
   useBeforeunload((event) => event.preventDefault());
 
   return (
-    <Container fixed>
+    <>
       <AppNavBar />
       <AppContents />
-    </Container>
+    </>
   );
 }
 

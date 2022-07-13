@@ -1,13 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "jotai";
-
+import { Normalize } from "styled-normalize";
 import App from "./App";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider>
-      <App />
-    </Provider>
+    <Normalize />
+    <App />
   </React.StrictMode>
 );
