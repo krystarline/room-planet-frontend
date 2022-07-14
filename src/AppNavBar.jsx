@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useCallback } from "react";
 
@@ -9,7 +10,6 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import ChairIcon from "@mui/icons-material/Chair";
 import ScreenshotMonitorIcon from "@mui/icons-material/ScreenshotMonitor";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import html2canvas from "html2canvas";
 import downloadjs from "downloadjs";
@@ -51,15 +51,6 @@ function AppNavBar() {
             <ScreenshotMonitorIcon />
           </IconButton>
           <PlanGuide />
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="back"
-            sx={{ mr: 2 }}
-          >
-            <ArrowBackIcon />
-          </IconButton>
         </Toolbar>
       </Container>
     </AppBar>

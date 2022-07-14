@@ -1,10 +1,11 @@
 /* eslint-disable import/order */
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { createTheme, ThemeProvider, Container } from "@mui/material";
+
+import { Landing, Plan } from "./views";
 
 import "./App.css";
-import { createTheme, ThemeProvider } from "@mui/material";
-import Container from "@mui/material/Container";
-import Plan from "./components/Plan";
 
 const theme = createTheme({
   typography: {
@@ -16,7 +17,10 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Container disableGutters maxWidth={false}>
-        <Plan />
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/plan" element={<Plan />} />
+        </Routes>
       </Container>
     </ThemeProvider>
   );
