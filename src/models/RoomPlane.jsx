@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef } from "react";
+import React from "react";
+import { DoubleSide } from "three";
 import { usePlane } from "@react-three/cannon";
 
 function RoomPlane({ ...props }) {
-  const ref = useRef();
-  const [plane] = usePlane(() => ({
+  const [ref] = usePlane(() => ({
     type: "Static",
     material: "ground",
     ...props,
@@ -14,9 +14,9 @@ function RoomPlane({ ...props }) {
   return (
     // 20, 20, transparent="true" opacity="1"
     <group ref={ref} {...props}>
-      <mesh receiveShadow>
-        <planeGeometry args={[8, 8]} />
-        <meshStandardMaterial color="brown" />
+      <mesh>
+        <planeGeometry args={[16, 16]} />
+        <meshStandardMaterial color="orange" side={DoubleSide} />
       </mesh>
     </group>
   );

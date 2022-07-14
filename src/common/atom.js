@@ -2,6 +2,8 @@ import { atom } from "jotai";
 import { atomWithProxy } from "jotai/valtio";
 import { proxy } from "valtio/vanilla";
 
+const toolProxy = proxy({ type: "painter" });
+const dragProxy = proxy({ activated: false });
 const colorProxy = proxy({
   current: null,
   items: [
@@ -10,13 +12,13 @@ const colorProxy = proxy({
       "Ottoman fabric": "#ffffff",
     },
     {
-      Frame: "#acd",
-      White: "#eec",
-      Pillow: "#ffa",
-      Blanket: "#ffd",
+      "Table black": "#ffffff",
+      "Table top": "#ffffff",
     },
   ],
 });
 
 export const modelsAtom = atom([false, false, false, false]);
+export const toolAtom = atomWithProxy(toolProxy, { sync: true });
 export const colorAtom = atomWithProxy(colorProxy, { sync: true });
+export const dragAtom = atomWithProxy(dragProxy, { sync: true });

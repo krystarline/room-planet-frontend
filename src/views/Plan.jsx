@@ -5,6 +5,7 @@ import { Loader } from "@react-three/drei";
 
 import AppContents from "../AppContents";
 import AppNavBar from "../AppNavBar";
+import AppFooter from "../AppFooter";
 import usePrompt from "../hooks/usePrompt";
 
 function Plan() {
@@ -16,6 +17,7 @@ function Plan() {
     <Suspense fallback={<Loader barStyles={{ width: 300, height: 25 }} />}>
       <AppNavBar />
       <AppContents />
+      <AppFooter />
     </Suspense>
   );
 }

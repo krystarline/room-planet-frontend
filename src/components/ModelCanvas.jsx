@@ -6,7 +6,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 
 import { Canvas } from "@react-three/fiber";
 import { ContactShadows, OrbitControls } from "@react-three/drei";
@@ -20,7 +20,7 @@ const ModelCanvasLayout = styled.div`
 `;
 
 function ModelCanvas({ children, index }) {
-  const [, setModels] = useAtom(modelsAtom);
+  const [models, setModels] = useAtom(modelsAtom);
   const handleOnDoubleClick = () => {
     setModels((prevModels) => {
       prevModels[index] = !prevModels[index];

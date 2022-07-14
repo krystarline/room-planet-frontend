@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@use-gesture/react": "^10.2.16",
     "aws-amplify": "^4.3.26",
+    "camera-controls": "^1.35.0",
     "downloadjs": "^1.4.7",
     "html2canvas": "^1.4.1",
     "jotai": "^1.7.3",

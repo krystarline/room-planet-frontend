@@ -2,15 +2,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 import React, { Suspense } from "react";
-import { useAtom } from "jotai";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 
-import { modelsAtom } from "../common/atom";
 import ModelCanvas from "./ModelCanvas";
-
 import Chair from "../models/Chair";
-import Bed from "../models/Bed";
+import Table from "../models/Table";
+// import Table from "../models/Table";
 
 import "react-multi-carousel/lib/styles.css";
 
@@ -39,7 +37,7 @@ const ModelCarouselLayout = styled.div`
 `;
 
 function ModelCarousel() {
-  const [models] = useAtom(modelsAtom);
+  // const [models] = useAtom(modelsAtom);
 
   return (
     <ModelCarouselLayout>
@@ -50,38 +48,20 @@ function ModelCarousel() {
         infinite
         showDots
       >
-        {/* {models.map((model, index) => (
-          <div key={index}>
-            <Suspense fallback={null}>
-              <ModelCanvas index={index}>
-                <Chair />
-              </ModelCanvas>
-            </Suspense>
-          </div>
-        ))} */}
         <div>
           <Suspense fallback={null}>
             <ModelCanvas index={0}>
-              <Chair />
+              <Chair initPos={[0, 0, 0]} />
             </ModelCanvas>
           </Suspense>
         </div>
         <div>
           <Suspense fallback={null}>
             <ModelCanvas index={1}>
-              <Bed />
+              <Table initPos={[0, 0, 0]} />
             </ModelCanvas>
           </Suspense>
         </div>
-        {/* <Suspense fallback={null}>
-          <ModelCanvas>
-            <Chair onDoubleClick={handleOnDoubleClick} />
-          </ModelCanvas>
-          <div>침대</div>
-          <div>책상</div>
-          <div>옷장</div>
-          <div>테이블</div>
-        </Suspense> */}
       </Carousel>
     </ModelCarouselLayout>
   );
