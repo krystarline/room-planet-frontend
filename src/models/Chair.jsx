@@ -2,60 +2,32 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from "react";
-import { useThree, useFrame } from "@react-three/fiber";
+import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Debug, useBox } from "@react-three/cannon";
 import { Select } from "@react-three/postprocessing";
-import { useDrag } from "@use-gesture/react";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 
-import { useHover } from "../hooks";
-import { toolAtom, colorAtom } from "../common/atom";
+import { useHover, useDrag, usePaint } from "../hooks";
+import { colorItemsAtom } from "../atoms";
 
-function Chair({ initPos, boxProps, groupProps }) {
-  const { size, viewport } = useThree();
+function Chair({ position: pos, ...props }) {
   const { nodes, materials } = useGLTF("/Ottoman.gltf");
-  const [position, setPosition] = useState(initPos || [0, 6, 0]);
+  const [position, setPosition] = useState(pos || [0, 6, 0]);
   const [ref, api] = useBox(() => ({
     dispose: null,
     type: "Static",
     mass: 10,
     args: [1.5, 0.75, 1.5],
     position,
-    ...boxProps,
+    ...props,
   }));
+
+  const bindDrag = useDrag(api, position, setPosition);
+  const bindPaint = usePaint(0);
   const [hovered, bindHover] = useHover();
 
-  const { type: toolType } = useAtomValue(toolAtom);
-  const [{ items }, setColor] = useAtom(colorAtom);
-
-  const isDraggerActivated = () => toolType === "dragger";
-  const isPainterActivated = () => toolType === "painter";
-
-  const bindDrag = useDrag(({ offset: [,], movement: [x, z] }) => {
-    const [, y] = position;
-    const aspect = size.width / viewport.width;
-
-    api.position.set(x / aspect, y, z / aspect);
-  });
-  const bindPaint = () => ({
-    onPointerUp: (e) => {
-      e.stopPropagation();
-      setColor((prev) => ({
-        ...prev,
-        current: { index: 0, name: e.object.material.name },
-      }));
-    },
-  });
-
-  useEffect(() => {
-    const unsub = api.position.subscribe((p) => {
-      setPosition(p);
-    });
-
-    return unsub;
-  }, [api]);
+  const items = useAtomValue(colorItemsAtom);
 
   return (
     <Select enabled={hovered}>
@@ -65,9 +37,8 @@ function Chair({ initPos, boxProps, groupProps }) {
           scale={0.3}
           dispose={null}
           {...bindHover()}
-          {...(isPainterActivated() && bindPaint())}
-          {...(isDraggerActivated() && bindDrag())}
-          {...groupProps}
+          {...bindPaint()}
+          {...bindDrag()}
         >
           <mesh
             castShadow

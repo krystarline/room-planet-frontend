@@ -17,9 +17,11 @@ import RoomPlane from "../models/RoomPlane";
 import RoomWall from "../models/RoomWall";
 import Chair from "../models/Chair";
 import Table from "../models/Table";
+// import Singlebed from "../models/Singlebed";
+import Desk from "../models/Desk";
 import Picker from "./Picker";
 
-import { colorAtom, modelsAtom, toolAtom } from "../common/atom";
+import { colorAtom, modelsAtom, toolAtom } from "../atoms";
 import RoomCanvasTools from "./RoomCanvasTools";
 
 const RoomLayout = styled.div`
@@ -84,8 +86,7 @@ function Room() {
             <RoomWall position={[-8, 4, 0]} rotation={[0, Math.PI / 2, 0]} />
             <RoomWall position={[0, 4, -8]} rotation={[0, 0, 0]} />
             {/* <Bedroom rotation={[0, -Math.PI / 2, 0]} /> */}
-
-            {/* <Lamp /> */}
+            {/* <Singlebed /> */}
 
             <Selection>
               <EffectComposer multisampling={8} autoClear={false}>
@@ -96,8 +97,9 @@ function Room() {
                   width={500}
                 />
               </EffectComposer>
-              {models[0] && <Chair boxProps={{ type: "Dynamic" }} />}
-              {models[1] && <Table boxProps={{ type: "Dynamic" }} />}
+              {models[0] && <Chair type="Dynamic" />}
+              {models[1] && <Table type="Dynamic" />}
+              {models[2] && <Desk type="Dynamic" />}
             </Selection>
           </Debug>
         </Physics>

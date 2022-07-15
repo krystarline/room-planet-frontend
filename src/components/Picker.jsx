@@ -3,7 +3,7 @@ import React from "react";
 import { HexColorPicker } from "react-colorful";
 import { useAtom } from "jotai";
 
-import { colorAtom } from "../common/atom";
+import { colorAtom } from "../atoms";
 
 function Picker() {
   const [{ current, items }, setColor] = useAtom(colorAtom);

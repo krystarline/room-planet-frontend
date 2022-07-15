@@ -5,7 +5,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import DraggerIcon from "@mui/icons-material/Place";
 import PainterIcon from "@mui/icons-material/ColorLens";
 
-import { toolAtom } from "../common/atom";
+import { toolAtom } from "../atoms";
 
 function RoomCanvasTools() {
   const [{ type: toolType }, setTool] = useAtom(toolAtom);

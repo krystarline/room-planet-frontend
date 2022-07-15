@@ -8,7 +8,8 @@ import Carousel from "react-multi-carousel";
 import ModelCanvas from "./ModelCanvas";
 import Chair from "../models/Chair";
 import Table from "../models/Table";
-// import Table from "../models/Table";
+import Desk from "../models/Desk";
+import Bed from "../models/Bed";
 
 import "react-multi-carousel/lib/styles.css";
 
@@ -37,7 +38,12 @@ const ModelCarouselLayout = styled.div`
 `;
 
 function ModelCarousel() {
-  // const [models] = useAtom(modelsAtom);
+  const furniture = [
+    { component: Chair, position: [0, 0, 0] },
+    { component: Table, position: [0, 0, 0] },
+    { component: Desk, position: [0, 0, 0] },
+    { component: Bed, position: [0, 0, 0] },
+  ];
 
   return (
     <ModelCarouselLayout>
@@ -51,17 +57,31 @@ function ModelCarousel() {
         <div>
           <Suspense fallback={null}>
             <ModelCanvas index={0}>
-              <Chair initPos={[0, 0, 0]} />
+              <Chair position={[0, 0, 0]} />
             </ModelCanvas>
           </Suspense>
         </div>
         <div>
           <Suspense fallback={null}>
             <ModelCanvas index={1}>
-              <Table initPos={[0, 0, 0]} />
+              <Table position={[0, -0.45, 0]} />
             </ModelCanvas>
           </Suspense>
         </div>
+        <div>
+          <Suspense fallback={null}>
+            <ModelCanvas index={2}>
+              <Desk position={[0, -1.5, 0]} />
+            </ModelCanvas>
+          </Suspense>
+        </div>
+        {/* <div>
+          <Suspense fallback={null}>
+            <ModelCanvas index={3}>
+              <Bed position={[0, -2, 0]} />
+            </ModelCanvas>
+          </Suspense>
+        </div> */}
       </Carousel>
     </ModelCarouselLayout>
   );

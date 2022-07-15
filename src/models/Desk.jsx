@@ -1,28 +1,29 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { Debug, useBox } from "@react-three/cannon";
 import { Select } from "@react-three/postprocessing";
 import { useAtomValue } from "jotai";
 
-import { useHover, useDrag, usePaint } from "../hooks";
+import { useDrag, usePaint, useHover } from "../hooks";
 import { colorItemsAtom } from "../atoms";
 
-function Singlebed({ position: pos, ...props }) {
-  const { nodes, materials } = useGLTF("/Bed.glb");
+function Desk({ pos, ...props }) {
+  const { nodes, materials } = useGLTF("/Desk.glb");
   const [position, setPosition] = useState(pos || [0, 0, 0]);
   const [ref, api] = useBox(() => ({
-    dispose: null,
     type: "Static",
-    mass: 10,
-    args: [4, 4, 8],
+    dispose: null,
+    mass: 5,
+    args: [2.5, 5.5, 4.5],
     position,
     ...props,
   }));
 
   const bindDrag = useDrag(api, position, setPosition);
-  const bindPaint = usePaint(3);
+  const bindPaint = usePaint(2);
   const [hovered, bindHover] = useHover();
 
   const items = useAtomValue(colorItemsAtom);
@@ -32,35 +33,29 @@ function Singlebed({ position: pos, ...props }) {
       <Select enabled={hovered}>
         <group
           ref={ref}
-          scale={4}
+          scale={2}
           dispose={null}
           {...bindHover()}
-          {...bindPaint()}
           {...bindDrag()}
+          {...bindPaint()}
         >
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.Bed_Frame.geometry}
-            material={materials["Bed Frame"]}
-            material-color={items[3]["Bed Frame"]}
+            geometry={nodes.Cube.geometry}
+            material={materials.Material}
+            material-color={items[2].Material}
+            position={[-0.07, 0.94, 0.63]}
+            scale={[0.51, 0.42, 0.53]}
           />
           <mesh
             castShadow
             receiveShadow
-            geometry={nodes.Bed_Pillow.geometry}
-            material={materials["Bed Pillow"]}
-            material-color={items[3]["Bed Pillow"]}
-            position={[0, 0.65, -0.8]}
-            rotation={[0.64, 0, 0]}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.Bed_Mattress.geometry}
-            material={materials["Bed Mattress"]}
-            material-color={items[3]["Bed Mattress"]}
-            position={[0, 0.05, 0]}
+            geometry={nodes.desk_collider.geometry}
+            material={materials.Material}
+            material-color={items[2].Material}
+            position={[-0.07, 0.94, 0.63]}
+            scale={[0.51, 0.42, 0.53]}
           />
         </group>
       </Select>
@@ -68,4 +63,4 @@ function Singlebed({ position: pos, ...props }) {
   );
 }
 
-export default Singlebed;
+export default Desk;
