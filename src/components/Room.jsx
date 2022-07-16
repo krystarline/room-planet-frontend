@@ -1,9 +1,10 @@
+/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useMemo } from "react";
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Html, ContactShadows, OrbitControls, Sky } from "@react-three/drei";
+import React, { useRef, useMemo, createElement, Fragment } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { Sky, Html, OrbitControls, ContactShadows } from "@react-three/drei";
 import { Physics, Debug } from "@react-three/cannon";
 import {
   Selection,
@@ -17,36 +18,42 @@ import RoomPlane from "../models/RoomPlane";
 import RoomWall from "../models/RoomWall";
 import Chair from "../models/Chair";
 import Table from "../models/Table";
-// import Singlebed from "../models/Singlebed";
 import Desk from "../models/Desk";
 import Picker from "./Picker";
 
-import { colorAtom, modelsAtom, toolAtom } from "../atoms";
 import RoomCanvasTools from "./RoomCanvasTools";
+import { colorAtom, modelsAtom, toolTypeAtom } from "../atoms";
 
 const RoomLayout = styled.div`
   height: 60vh;
   overflow: hidden;
 `;
 
-// function RoomControls() {
-//   const tool = useAtomValue(toolAtom);
-//   const camera = useThree((state) => state.camera);
+function OrbitController() {
+  const ref = useRef();
+  const toolType = useAtomValue(toolTypeAtom);
 
-//   useEffect(() => {
-//     if (tool.type === "dragger") {
-//       camera.position.set(...[60, 100, 50]);
-//       // camera.lookAt(...[0, 0, 0]);
-//     }
+  useFrame(() => {
+    if (toolType === "dragger") {
+      ref.current.object.position.x = 0;
+      ref.current.object.position.y = 100;
+      ref.current.object.position.z = 0;
+    }
 
-//     camera.position.set(...[80, 60, 50]);
-//   }, [camera, tool]);
-// }
+    ref.current.update();
+  });
+
+  return <OrbitControls ref={ref} enabled={!(toolType === "dragger")} />;
+}
 
 function Room() {
   const models = useAtomValue(modelsAtom);
-  const { type: toolType } = useAtomValue(toolAtom);
   const [color, setColor] = useAtom(colorAtom);
+  const furniture = [
+    { component: Chair },
+    { component: Table },
+    { component: Desk },
+  ];
 
   return (
     <RoomLayout id="room-canvas">
@@ -68,7 +75,6 @@ function Room() {
         />
         <directionalLight intensity={0.5} />
         <ambientLight intensity={1} />
-        <OrbitControls enabled={!(toolType === "dragger")} />
         <ContactShadows
           position={[0, -0.8, 0]}
           opacity={0.5}
@@ -85,8 +91,6 @@ function Room() {
             <RoomPlane position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} />
             <RoomWall position={[-8, 4, 0]} rotation={[0, Math.PI / 2, 0]} />
             <RoomWall position={[0, 4, -8]} rotation={[0, 0, 0]} />
-            {/* <Bedroom rotation={[0, -Math.PI / 2, 0]} /> */}
-            {/* <Singlebed /> */}
 
             <Selection>
               <EffectComposer multisampling={8} autoClear={false}>
@@ -97,13 +101,16 @@ function Room() {
                   width={500}
                 />
               </EffectComposer>
-              {models[0] && <Chair type="Dynamic" />}
-              {models[1] && <Table type="Dynamic" />}
-              {models[2] && <Desk type="Dynamic" />}
+              {furniture.map(({ component }, index) => (
+                <Fragment key={index}>
+                  {models[index] &&
+                    createElement(component, { type: "Dynamic" })}
+                </Fragment>
+              ))}
             </Selection>
           </Debug>
         </Physics>
-        {/* <RoomControls /> */}
+        <OrbitController />
       </Canvas>
     </RoomLayout>
   );

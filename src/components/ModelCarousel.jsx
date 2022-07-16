@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
-import React, { Suspense } from "react";
+import React, { createElement, Suspense, useMemo } from "react";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
 
@@ -9,7 +9,6 @@ import ModelCanvas from "./ModelCanvas";
 import Chair from "../models/Chair";
 import Table from "../models/Table";
 import Desk from "../models/Desk";
-import Bed from "../models/Bed";
 
 import "react-multi-carousel/lib/styles.css";
 
@@ -39,10 +38,9 @@ const ModelCarouselLayout = styled.div`
 
 function ModelCarousel() {
   const furniture = [
-    { component: Chair, position: [0, 0, 0] },
-    { component: Table, position: [0, 0, 0] },
-    { component: Desk, position: [0, 0, 0] },
-    { component: Bed, position: [0, 0, 0] },
+    { component: Chair, props: { position: [0, 0, 0] } },
+    { component: Table, props: { position: [0, -0.45, 0] } },
+    { component: Desk, props: { position: [0, -1.5, 0] } },
   ];
 
   return (
@@ -54,34 +52,15 @@ function ModelCarousel() {
         infinite
         showDots
       >
-        <div>
-          <Suspense fallback={null}>
-            <ModelCanvas index={0}>
-              <Chair position={[0, 0, 0]} />
-            </ModelCanvas>
-          </Suspense>
-        </div>
-        <div>
-          <Suspense fallback={null}>
-            <ModelCanvas index={1}>
-              <Table position={[0, -0.45, 0]} />
-            </ModelCanvas>
-          </Suspense>
-        </div>
-        <div>
-          <Suspense fallback={null}>
-            <ModelCanvas index={2}>
-              <Desk position={[0, -1.5, 0]} />
-            </ModelCanvas>
-          </Suspense>
-        </div>
-        {/* <div>
-          <Suspense fallback={null}>
-            <ModelCanvas index={3}>
-              <Bed position={[0, -2, 0]} />
-            </ModelCanvas>
-          </Suspense>
-        </div> */}
+        {furniture.map(({ component, ...props }, index) => (
+          <div key={index}>
+            <Suspense fallback={null}>
+              <ModelCanvas index={index}>
+                {createElement(component, { ...props })}
+              </ModelCanvas>
+            </Suspense>
+          </div>
+        ))}
       </Carousel>
     </ModelCarouselLayout>
   );
