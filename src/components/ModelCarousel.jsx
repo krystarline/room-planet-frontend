@@ -11,6 +11,8 @@ import Table from "../models/Table";
 import Desk from "../models/Desk";
 
 import "react-multi-carousel/lib/styles.css";
+import Pouf from "../models/Pouf";
+import Bed from "../models/Bed";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,9 +40,11 @@ const ModelCarouselLayout = styled.div`
 
 function ModelCarousel() {
   const furniture = [
-    { component: Chair, props: { position: [0, 0, 0] } },
+    { component: Chair, props: { position: [0, 0, 0] }, color: "#C2E2F5" },
     { component: Table, props: { position: [0, -0.45, 0] } },
-    { component: Desk, props: { position: [0, -1.5, 0] } },
+    { component: Bed, props: { position: [0, -1.5, 0] } },
+    { component: Desk, props: { position: [0, -1.5, 0] }, color: "#EEC" },
+    { component: Pouf, props: { position: [0, 0, 0] } },
   ];
 
   return (
@@ -52,10 +56,11 @@ function ModelCarousel() {
         infinite
         showDots
       >
-        {furniture.map(({ component, ...props }, index) => (
+        {furniture.map(({ component, props, color }, index) => (
           <div key={index}>
             <Suspense fallback={null}>
               <ModelCanvas index={index}>
+                {color && <color attach="background" args={[`${color}`]} />}
                 {createElement(component, { ...props })}
               </ModelCanvas>
             </Suspense>

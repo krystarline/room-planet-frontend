@@ -4,7 +4,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useRef, useMemo, createElement, Fragment } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Sky, Html, OrbitControls, ContactShadows } from "@react-three/drei";
+import { Sky, OrbitControls, ContactShadows } from "@react-three/drei";
 import { Physics, Debug } from "@react-three/cannon";
 import {
   Selection,
@@ -19,6 +19,8 @@ import RoomWall from "../models/RoomWall";
 import Chair from "../models/Chair";
 import Table from "../models/Table";
 import Desk from "../models/Desk";
+import Bed from "../models/Bed";
+import Pouf from "../models/Pouf";
 import Picker from "./Picker";
 
 import RoomCanvasTools from "./RoomCanvasTools";
@@ -50,13 +52,17 @@ function Room() {
   const models = useAtomValue(modelsAtom);
   const [color, setColor] = useAtom(colorAtom);
   const furniture = [
-    { component: Chair },
-    { component: Table },
-    { component: Desk },
+    { component: Chair, props: { position: [0, 3, 0], showroomType: "room" } },
+    { component: Table, props: { position: [0, 3, 0], showroomType: "room" } },
+    { component: Bed, props: { position: [0, 3, 0], showroomType: "room" } },
+    { component: Desk, props: { position: [0, 3, 0], showroomType: "room" } },
+    { component: Pouf, props: { position: [0, 3, 0], showroomType: "room" } },
   ];
 
   return (
     <RoomLayout id="room-canvas">
+      <RoomCanvasTools />
+      {color?.current && <Picker />}
       <Canvas
         camera={{
           fov: 9,
@@ -82,29 +88,24 @@ function Room() {
           blur={1.5}
           far={0.8}
         />
-        <Html position={[5, 10, 5]}>
-          <RoomCanvasTools />
-          {color?.current && <Picker />}
-        </Html>
         <Physics gravity={[0, -9.8, 0]}>
           <Debug color="black">
             <RoomPlane position={[0, 0, 0]} rotation={[-Math.PI / 2, 0, 0]} />
             <RoomWall position={[-8, 4, 0]} rotation={[0, Math.PI / 2, 0]} />
             <RoomWall position={[0, 4, -8]} rotation={[0, 0, 0]} />
-
             <Selection>
-              <EffectComposer multisampling={8} autoClear={false}>
+              {/* <EffectComposer multisampling={8} autoClear={false}>
                 <Outline
                   blur
                   visibleEdgeColor="white"
                   edgeStrength={10}
                   width={500}
                 />
-              </EffectComposer>
-              {furniture.map(({ component }, index) => (
+              </EffectComposer> */}
+              {furniture.map(({ component, props }, index) => (
                 <Fragment key={index}>
                   {models[index] &&
-                    createElement(component, { type: "Dynamic" })}
+                    createElement(component, { type: "Dynamic", ...props })}
                 </Fragment>
               ))}
             </Selection>

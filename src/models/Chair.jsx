@@ -11,7 +11,7 @@ import { useAtomValue } from "jotai";
 import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
 
-function Chair({ position: pos, ...props }) {
+function Chair({ showroomType, position: pos, ...props }) {
   const { nodes, materials } = useGLTF("/Ottoman.gltf");
   const [position, setPosition] = useState(pos || [0, 6, 0]);
   const [ref, api] = useBox(() => ({
@@ -36,9 +36,9 @@ function Chair({ position: pos, ...props }) {
           ref={ref}
           scale={0.3}
           dispose={null}
-          {...bindHover()}
-          {...bindPaint()}
-          {...bindDrag()}
+          {...(showroomType === "room" && bindHover())}
+          {...(showroomType === "room" && bindPaint())}
+          {...(showroomType === "room" && bindDrag())}
         >
           <mesh
             castShadow

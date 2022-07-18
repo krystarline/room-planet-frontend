@@ -16,6 +16,8 @@ import { modelsAtom } from "../atoms";
 
 const ModelCanvasLayout = styled.div`
   height: 20vh;
+  /* border-radius: 3%; */
+  border-left: 2px solid #808080;
   overflow: hidden;
 `;
 

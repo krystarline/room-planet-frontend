@@ -9,14 +9,14 @@ import { useAtomValue } from "jotai";
 import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
 
-function Singlebed({ position: pos, ...props }) {
+function Bed({ showroomType, position: pos, ...props }) {
   const { nodes, materials } = useGLTF("/Bed.glb");
   const [position, setPosition] = useState(pos || [0, 0, 0]);
   const [ref, api] = useBox(() => ({
     dispose: null,
     type: "Static",
-    mass: 10,
-    args: [4, 4, 8],
+    mass: 5,
+    args: [3, 0, 6],
     position,
     ...props,
   }));
@@ -28,15 +28,15 @@ function Singlebed({ position: pos, ...props }) {
   const items = useAtomValue(colorItemsAtom);
 
   return (
-    <Debug color="black">
-      <Select enabled={hovered}>
+    <Select enabled={hovered}>
+      <Debug color="black">
         <group
           ref={ref}
-          scale={4}
+          scale={3}
           dispose={null}
-          {...bindHover()}
-          {...bindPaint()}
-          {...bindDrag()}
+          {...(showroomType === "room" && bindHover())}
+          {...(showroomType === "room" && bindPaint())}
+          {...(showroomType === "room" && bindDrag())}
         >
           <mesh
             castShadow
@@ -63,9 +63,9 @@ function Singlebed({ position: pos, ...props }) {
             position={[0, 0.05, 0]}
           />
         </group>
-      </Select>
-    </Debug>
+      </Debug>
+    </Select>
   );
 }
 
-export default Singlebed;
+export default Bed;

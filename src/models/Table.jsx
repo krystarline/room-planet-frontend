@@ -10,7 +10,7 @@ import { useAtomValue } from "jotai";
 import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
 
-function Table({ position: pos, ...props }) {
+function Table({ showroomType, position: pos, ...props }) {
   const { nodes, materials } = useGLTF("/Table.gltf");
   const [position, setPosition] = useState(pos || [0, 6, 0]);
   const [ref, api] = useBox(() => ({
@@ -35,9 +35,9 @@ function Table({ position: pos, ...props }) {
           ref={ref}
           dispose={null}
           scale={0.2}
-          {...bindHover()}
-          {...bindPaint()}
-          {...bindDrag()}
+          {...(showroomType === "room" && bindHover())}
+          {...(showroomType === "room" && bindPaint())}
+          {...(showroomType === "room" && bindDrag())}
         >
           <mesh
             castShadow
