@@ -45,6 +45,7 @@ function AppNavBar() {
             edge="start"
             color="default"
             aria-label="screen-shot"
+            title="Screenshot"
             sx={{ mr: 2 }}
             onClick={handleCaptureClick}
           >

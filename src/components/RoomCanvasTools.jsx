@@ -28,10 +28,10 @@ function RoomCanvasTools() {
         value={toolType}
         onChange={handleToolChange}
       >
-        <ToggleButton value="dragger" aria-label="dragger">
+        <ToggleButton value="dragger" aria-label="dragger" title="Dragger">
           <DraggerIcon />
         </ToggleButton>
-        <ToggleButton value="painter" aria-label="painter">
+        <ToggleButton value="painter" aria-label="painter" title="Painter">
           <PainterIcon />
         </ToggleButton>
       </ToggleButtonGroup>
