@@ -6,13 +6,13 @@ import { useAtomValue } from "jotai";
 import { toolTypeAtom } from "../atoms";
 
 function useDrag(api, position, setPosition) {
-  const toolType = useAtomValue(toolTypeAtom);
   const { size, viewport } = useThree();
-  const bind = useGeatureDrag(({ offset: [,], movement: [x, z] }) => {
-    const aspect = size.width / viewport.width;
+  const toolType = useAtomValue(toolTypeAtom);
+  const aspect = size.width / viewport.width;
+  const bind = useGeatureDrag(({ offset: [ox, oz] }) => {
     const [, y] = position;
 
-    api.position.set(x / aspect, y, z / aspect);
+    api.position.set(ox / aspect, y, oz / aspect);
   });
 
   useEffect(
