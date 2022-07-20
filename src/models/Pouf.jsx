@@ -8,20 +8,24 @@ import { useAtomValue } from "jotai";
 
 import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
+import useRotate from "../hooks/useRotate";
 
 function Pouf({ showroomType, position: pos, ...props }) {
   const { nodes, materials } = useGLTF("/Pouf.glb");
   const [position, setPosition] = useState(pos || [0, 0, 0]);
+  const [rotation, setRotation] = useState([0, 0, 0]);
   const [ref, api] = useBox(() => ({
     dispose: null,
     type: "Static",
     mass: 10,
-    args: [0.8, 0.52, 1.3],
+    args: [0.8, 0.52, 1.4],
     position,
+    rotation,
     ...props,
   }));
 
   const bindDrag = useDrag(api, position, setPosition);
+  const bindRotate = useRotate(api, rotation, setRotation);
   const bindPaint = usePaint(4);
   const [hovered, bindHover] = useHover();
 
@@ -35,6 +39,7 @@ function Pouf({ showroomType, position: pos, ...props }) {
           dispose={null}
           {...(showroomType === "room" && bindHover())}
           {...(showroomType === "room" && bindPaint())}
+          {...(showroomType === "room" && bindRotate())}
           {...(showroomType === "room" && bindDrag())}
         >
           <group

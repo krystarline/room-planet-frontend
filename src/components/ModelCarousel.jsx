@@ -4,15 +4,16 @@
 import React, { createElement, Suspense, useMemo } from "react";
 import styled from "styled-components";
 import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 import ModelCanvas from "./ModelCanvas";
+
 import Chair from "../models/Chair";
 import Table from "../models/Table";
-import Desk from "../models/Desk";
-
-import "react-multi-carousel/lib/styles.css";
-import Pouf from "../models/Pouf";
 import Bed from "../models/Bed";
+import Desk from "../models/Desk";
+import Pouf from "../models/Pouf";
+import LeatherChair from "../models/LeatherChair";
 
 const responsive = {
   superLargeDesktop: {
@@ -40,11 +41,12 @@ const ModelCarouselLayout = styled.div`
 
 function ModelCarousel() {
   const furniture = [
-    { component: Chair, props: { position: [0, 0, 0] }, color: "#C2E2F5" },
+    { component: Chair, props: { position: [0, 0, 0] } },
     { component: Table, props: { position: [0, -0.45, 0] } },
     { component: Bed, props: { position: [0, -1.5, 0] } },
-    { component: Desk, props: { position: [0, -1.5, 0] }, color: "#EEC" },
+    { component: Desk, props: { position: [0, -1.5, 0] } },
     { component: Pouf, props: { position: [0, 0, 0] } },
+    { component: LeatherChair, props: { position: [0, -1.5, 0] } },
   ];
 
   return (
@@ -53,14 +55,13 @@ function ModelCarousel() {
         responsive={responsive}
         // autoPlay="true"
         // autoPlaySpeed={2000}
-        infinite
+        // infinite
         showDots
       >
-        {furniture.map(({ component, props, color }, index) => (
+        {furniture.map(({ component, props }, index) => (
           <div key={index}>
             <Suspense fallback={null}>
               <ModelCanvas index={index}>
-                {color && <color attach="background" args={[`${color}`]} />}
                 {createElement(component, { ...props })}
               </ModelCanvas>
             </Suspense>

@@ -9,21 +9,25 @@ import { useAtomValue } from "jotai";
 
 import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
+import useRotate from "../hooks/useRotate";
 
 function Table({ showroomType, position: pos, ...props }) {
   const { nodes, materials } = useGLTF("/Table.gltf");
   const [position, setPosition] = useState(pos || [0, 6, 0]);
+  const [rotation, setRotation] = useState([0, 0, 0]);
   const [ref, api] = useBox(() => ({
     dispose: null,
     type: "Static",
-    mass: 5,
+    mass: 10,
     position,
+    rotation,
     args: [1.5, 1.5, 1.5],
     ...props,
   }));
 
   const bindDrag = useDrag(api, position, setPosition);
-  const bindPaint = usePaint(0);
+  const bindRotate = useRotate(api, rotation, setRotation);
+  const bindPaint = usePaint(1);
   const [hovered, bindHover] = useHover();
 
   const items = useAtomValue(colorItemsAtom);
@@ -37,6 +41,7 @@ function Table({ showroomType, position: pos, ...props }) {
           scale={0.2}
           {...(showroomType === "room" && bindHover())}
           {...(showroomType === "room" && bindPaint())}
+          {...(showroomType === "room" && bindRotate())}
           {...(showroomType === "room" && bindDrag())}
         >
           <mesh

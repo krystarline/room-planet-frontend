@@ -21,9 +21,10 @@ import Table from "../models/Table";
 import Desk from "../models/Desk";
 import Bed from "../models/Bed";
 import Pouf from "../models/Pouf";
-import Picker from "./Picker";
+import LeatherChair from "../models/LeatherChair";
 
 import RoomCanvasTools from "./RoomCanvasTools";
+import Picker from "./Picker";
 import { colorAtom, modelsAtom, toolTypeAtom } from "../atoms";
 
 const RoomLayout = styled.div`
@@ -36,7 +37,7 @@ function OrbitController() {
   const toolType = useAtomValue(toolTypeAtom);
 
   useFrame(() => {
-    if (toolType === "dragger") {
+    if (toolType === "dragger" || toolType === "rotator") {
       ref.current.object.position.x = 0;
       ref.current.object.position.y = 100;
       ref.current.object.position.z = 0;
@@ -45,7 +46,12 @@ function OrbitController() {
     ref.current.update();
   });
 
-  return <OrbitControls ref={ref} enabled={!(toolType === "dragger")} />;
+  return (
+    <OrbitControls
+      ref={ref}
+      enabled={!(toolType === "dragger" || toolType === "rotator")}
+    />
+  );
 }
 
 function Room() {
@@ -57,6 +63,10 @@ function Room() {
     { component: Bed, props: { position: [0, 3, 0], showroomType: "room" } },
     { component: Desk, props: { position: [0, 3, 0], showroomType: "room" } },
     { component: Pouf, props: { position: [0, 3, 0], showroomType: "room" } },
+    {
+      component: LeatherChair,
+      props: { position: [0, 3, 0], showroomType: "room" },
+    },
   ];
 
   return (
