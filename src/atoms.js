@@ -12,8 +12,7 @@ const colorProxy = proxy({
       "Ottoman fabric": "#ffffff",
     },
     {
-      "Table black": "#ffffff",
-      "Table top": "#ffffff",
+      Table: "#ffffff",
     },
     {
       "Bed Frame": "#ffffff",
@@ -29,10 +28,28 @@ const colorProxy = proxy({
     {
       chair: "#ffffff",
     },
+    {
+      Frame: "#ffffff",
+      Blanket: "#ffffff",
+      "Pin picture.001": "#ffffff",
+    },
+    {
+      "Armchair wood": "#ffffff",
+      Cushion: "#ffffff",
+    },
   ],
 });
 
-export const modelsAtom = atom([false, false, false, false, false, false]);
+export const modelsAtom = atom([
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+  false,
+]);
 
 export const toolAtom = atomWithProxy(toolProxy, { sync: true });
 export const toolTypeAtom = atom((get) => get(toolAtom).type);

@@ -16,7 +16,7 @@ function RoomPlane({ ...props }) {
     <group ref={ref} {...props}>
       <mesh>
         <planeGeometry args={[16, 16]} />
-        <meshStandardMaterial color="orange" side={DoubleSide} />
+        <meshStandardMaterial color="yellow" side={DoubleSide} />
       </mesh>
     </group>
   );

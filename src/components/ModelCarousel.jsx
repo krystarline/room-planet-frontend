@@ -9,11 +9,13 @@ import "react-multi-carousel/lib/styles.css";
 import ModelCanvas from "./ModelCanvas";
 
 import Chair from "../models/Chair";
-import Table from "../models/Table";
 import Bed from "../models/Bed";
 import Desk from "../models/Desk";
 import Pouf from "../models/Pouf";
 import LeatherChair from "../models/LeatherChair";
+import Sofa from "../models/Sofa";
+import Armchair from "../models/Armchair";
+import Whitetable from "../models/Whitetable";
 
 const responsive = {
   superLargeDesktop: {
@@ -42,11 +44,13 @@ const ModelCarouselLayout = styled.div`
 function ModelCarousel() {
   const furniture = [
     { component: Chair, props: { position: [0, 0, 0] } },
-    { component: Table, props: { position: [0, -0.45, 0] } },
+    { component: Whitetable, props: { position: [0, -1.5, 0] } },
     { component: Bed, props: { position: [0, -1.5, 0] } },
     { component: Desk, props: { position: [0, -1.5, 0] } },
     { component: Pouf, props: { position: [0, 0, 0] } },
     { component: LeatherChair, props: { position: [0, -1.5, 0] } },
+    { component: Sofa, props: { position: [0, -0.5, 0] } },
+    { component: Armchair, props: { position: [0, 0, 0] } },
   ];
 
   return (

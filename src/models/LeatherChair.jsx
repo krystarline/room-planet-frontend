@@ -45,8 +45,8 @@ function LeatherChair({ showroomType, position: pos, ...props }) {
           {...(showroomType === "room" && bindDrag())}
         >
           <mesh
-            castShadow
-            receiveShadow
+            // castShadow
+            // receiveShadow
             geometry={nodes.koltuk.geometry}
             material={materials.chair}
             material-color={items[5].chair}

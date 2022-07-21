@@ -13,7 +13,11 @@ function RoomWall(props) {
     <group ref={ref}>
       <mesh>
         <planeGeometry args={[16, 8]} />
-        <meshStandardMaterial color="orange" side={DoubleSide} />
+        <meshStandardMaterial
+          transparent="true"
+          opacity="0"
+          side={DoubleSide}
+        />
       </mesh>
     </group>
   );
