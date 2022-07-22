@@ -60,7 +60,7 @@ function ModelCarousel() {
 
   return (
     <ModelCarouselLayout>
-      <Carousel responsive={responsive} showDots>
+      <Carousel responsive={responsive} slidesToSlide={3} showDots>
         {furniture.map(({ component, props }, index) => (
           <div key={index}>
             <Suspense fallback={null}>
