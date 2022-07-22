@@ -6,9 +6,12 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
 import Typography from "@mui/material/Typography";
+import { useSetAtom } from "jotai";
 import React, { useState } from "react";
 import Carousel from "react-multi-carousel";
 import styled from "styled-components";
+
+import { colorAtom, toolAtom } from "../atoms";
 
 const style = {
   display: "grid",
@@ -45,13 +48,19 @@ const responsive = {
 
 const ModelCarouselLayout = styled.div`
   height: 40vh;
-  /* outline-style: auto; */
   overflow: hidden;
 `;
 
 function PlanGuide() {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
+  const setColor = useSetAtom(colorAtom);
+  const setTool = useSetAtom(toolAtom);
+
+  const handleOpen = () => {
+    setColor((prevColor) => ({ ...prevColor, current: null }));
+    setTool({ type: null });
+    setOpen(true);
+  };
   const handleClose = () => setOpen(false);
 
   return (
