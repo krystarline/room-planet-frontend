@@ -1,10 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 import ChairIcon from "@mui/icons-material/Chair";
 import ScreenshotMonitorIcon from "@mui/icons-material/ScreenshotMonitor";
 import { Container } from "@mui/material";
-// import Box from "@mui/material/Box";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
@@ -24,7 +20,6 @@ function AppNavBar() {
   }, []);
 
   return (
-    // <Box sx={{ flexGrow: 1 }}>
     <AppBar position="static">
       <Container fixed disableGutters>
         <Toolbar disableGutters>
@@ -55,7 +50,6 @@ function AppNavBar() {
         </Toolbar>
       </Container>
     </AppBar>
-    // </Box>
   );
 }
 

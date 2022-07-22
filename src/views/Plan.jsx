@@ -1,4 +1,3 @@
-/* eslint-disable import/no-useless-path-segments */
 import { Loader } from "@react-three/drei";
 import React, { Suspense } from "react";
 import { useBeforeunload } from "react-beforeunload";

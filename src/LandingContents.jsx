@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/prop-types */
 import ChairIcon from "@mui/icons-material/Chair";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";

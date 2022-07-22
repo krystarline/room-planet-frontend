@@ -1,5 +1,4 @@
 /* eslint-disable no-alert */
-/* eslint-disable react/no-unescaped-entities */
 
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import EmailIcon from "@mui/icons-material/Email";

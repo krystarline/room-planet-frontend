@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import useBlock from "./useBlock";
 import useDrag from "./useDrag";
 import useHover from "./useHover";
