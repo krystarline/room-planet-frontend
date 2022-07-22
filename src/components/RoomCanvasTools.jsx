@@ -1,12 +1,12 @@
-import React from "react";
-import { useAtom } from "jotai";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
+import PainterIcon from "@mui/icons-material/ColorLens";
+import DraggerIcon from "@mui/icons-material/Place";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import DraggerIcon from "@mui/icons-material/Place";
-import PainterIcon from "@mui/icons-material/ColorLens";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
-
+import { useAtom } from "jotai";
+import React from "react";
 import styled from "styled-components";
+
 import { toolAtom } from "../atoms";
 
 const ToggleButtonLayout = styled.div`

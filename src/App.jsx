@@ -1,7 +1,7 @@
 /* eslint-disable import/order */
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { createTheme, ThemeProvider, Container } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import { Container, ThemeProvider, createTheme } from "@mui/material";
 
 import { Landing, Plan } from "./views";
 

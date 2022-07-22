@@ -1,13 +1,11 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
-import React, { useState } from "react";
-import { useGLTF } from "@react-three/drei";
 import { Debug, useBox } from "@react-three/cannon";
+import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { useAtomValue } from "jotai";
+import React, { useState } from "react";
 
-import { useDrag, usePaint, useHover } from "../hooks";
 import { colorItemsAtom } from "../atoms";
+import { useDrag, useHover, usePaint } from "../hooks";
 import useRotate from "../hooks/useRotate";
 
 function Sofa({ showroomType, position: pos, ...props }) {

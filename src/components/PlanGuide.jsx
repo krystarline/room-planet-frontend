@@ -1,15 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
-import styled from "styled-components";
 
-import Carousel from "react-multi-carousel";
-
-import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import HelpIcon from "@mui/icons-material/Help";
+import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
 import Modal from "@mui/material/Modal";
+import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
+import Carousel from "react-multi-carousel";
+import styled from "styled-components";
 
 const style = {
   display: "grid",

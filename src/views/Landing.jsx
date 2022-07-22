@@ -1,8 +1,8 @@
 /* eslint-disable import/no-named-as-default */
 import React from "react";
 
-import LandingLayout from "../LandingLayout";
 import LandingContents from "../LandingContents";
+import LandingLayout from "../LandingLayout";
 
 function Landing() {
   const backgroundImage = "Room-Planet.png";

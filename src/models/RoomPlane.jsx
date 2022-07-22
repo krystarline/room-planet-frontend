@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-props-no-spreading */
+import { usePlane } from "@react-three/cannon";
 import React from "react";
 import { DoubleSide } from "three";
-import { usePlane } from "@react-three/cannon";
 
 function RoomPlane({ ...props }) {
   const [ref] = usePlane(() => ({

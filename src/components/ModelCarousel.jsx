@@ -1,21 +1,23 @@
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-unresolved */
-import React, { createElement, Suspense, useMemo } from "react";
-import styled from "styled-components";
+import React, { Suspense, createElement } from "react";
 import Carousel from "react-multi-carousel";
+import styled from "styled-components";
 import "react-multi-carousel/lib/styles.css";
 
+import {
+  ArmChair,
+  Bed,
+  Cabinet,
+  Chair,
+  Desk,
+  Hanger,
+  LeatherChair,
+  Pouf,
+  Shelf,
+  Sofa,
+  Table,
+} from "../models";
 import ModelCanvas from "./ModelCanvas";
-
-import Chair from "../models/Chair";
-import Bed from "../models/Bed";
-import Desk from "../models/Desk";
-import Pouf from "../models/Pouf";
-import LeatherChair from "../models/LeatherChair";
-import Sofa from "../models/Sofa";
-import Armchair from "../models/Armchair";
-import Whitetable from "../models/Whitetable";
 
 const responsive = {
   superLargeDesktop: {
@@ -44,24 +46,21 @@ const ModelCarouselLayout = styled.div`
 function ModelCarousel() {
   const furniture = [
     { component: Chair, props: { position: [0, 0, 0] } },
-    { component: Whitetable, props: { position: [0, -1.5, 0] } },
+    { component: Table, props: { position: [0, -1.5, 0] } },
     { component: Bed, props: { position: [0, -1.5, 0] } },
     { component: Desk, props: { position: [0, -1.5, 0] } },
     { component: Pouf, props: { position: [0, 0, 0] } },
     { component: LeatherChair, props: { position: [0, -1.5, 0] } },
     { component: Sofa, props: { position: [0, -0.5, 0] } },
-    { component: Armchair, props: { position: [0, 0, 0] } },
+    { component: ArmChair, props: { position: [0, 0, 0] } },
+    { component: Shelf, props: { position: [0, -2, 0] } },
+    { component: Hanger, props: { position: [0, -2.5, 0] } },
+    { component: Cabinet, props: { position: [0, -1.5, 0] } },
   ];
 
   return (
     <ModelCarouselLayout>
-      <Carousel
-        responsive={responsive}
-        // autoPlay="true"
-        // autoPlaySpeed={2000}
-        // infinite
-        showDots
-      >
+      <Carousel responsive={responsive} showDots>
         {furniture.map(({ component, props }, index) => (
           <div key={index}>
             <Suspense fallback={null}>

@@ -1,18 +1,15 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useState } from "react";
-import { useGLTF } from "@react-three/drei";
 import { Debug, useBox } from "@react-three/cannon";
+import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { useAtomValue } from "jotai";
+import React, { useState } from "react";
 
-import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
+import { useDrag, useHover, usePaint } from "../hooks";
 import useRotate from "../hooks/useRotate";
 
-function Armchair({ showroomType, position: pos, ...props }) {
-  const { nodes, materials } = useGLTF("/Armchair.glb");
+function ArmChair({ showroomType, position: pos, ...props }) {
+  const { nodes, materials } = useGLTF("/ArmChair.glb");
   const [position, setPosition] = useState(pos || [0, 6, 0]);
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [ref, api] = useBox(() => ({
@@ -80,4 +77,4 @@ function Armchair({ showroomType, position: pos, ...props }) {
   );
 }
 
-export default Armchair;
+export default ArmChair;

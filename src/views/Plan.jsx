@@ -1,11 +1,11 @@
 /* eslint-disable import/no-useless-path-segments */
+import { Loader } from "@react-three/drei";
 import React, { Suspense } from "react";
 import { useBeforeunload } from "react-beforeunload";
-import { Loader } from "@react-three/drei";
 
 import AppContents from "../AppContents";
-import AppNavBar from "../AppNavBar";
 import AppFooter from "../AppFooter";
+import AppNavBar from "../AppNavBar";
 import usePrompt from "../hooks/usePrompt";
 
 function Plan() {

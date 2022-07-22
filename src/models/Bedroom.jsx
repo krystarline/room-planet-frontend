@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-props-no-spreading */
-import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
+import React, { useRef } from "react";
 
 function Bedroom({ ...props }) {
   const group = useRef();

@@ -1,11 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/prop-types */
+import ChairIcon from "@mui/icons-material/Chair";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import ChairIcon from "@mui/icons-material/Chair";
 
 function LandingContents() {
   const backgroundImage = useMemo(() => "Room-Planet.png", []);

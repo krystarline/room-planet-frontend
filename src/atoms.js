@@ -37,10 +37,26 @@ const colorProxy = proxy({
       "Armchair wood": "#ffffff",
       Cushion: "#ffffff",
     },
+    {
+      Frame: "#ffffff",
+      "Pin picture.001": "#ffffff",
+    },
+    {
+      Hanger: "#ffffff",
+      "Nova 2": "#ffffff",
+    },
+    {
+      Madera: "#ffffff",
+      "Lamine Blance": "#ffffff",
+      Metalizado: "#ffffff",
+    },
   ],
 });
 
 export const modelsAtom = atom([
+  false,
+  false,
+  false,
   false,
   false,
   false,

@@ -1,7 +1,9 @@
 /* eslint-disable no-alert */
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
 
+import AttachFileIcon from "@mui/icons-material/AttachFile";
+import EmailIcon from "@mui/icons-material/Email";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import {
   Box,
   Container,
@@ -10,10 +12,7 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
-
-import EmailIcon from "@mui/icons-material/Email";
-import AttachFileIcon from "@mui/icons-material/AttachFile";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import React, { useState } from "react";
 
 const style = {
   display: "grid",

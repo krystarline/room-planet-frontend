@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
+import { useAtom } from "jotai";
 import React from "react";
 import { HexColorPicker } from "react-colorful";
-import { useAtom } from "jotai";
-
 import styled from "styled-components";
+
 import { colorAtom } from "../atoms";
 
 const PickerLayout = styled.div`

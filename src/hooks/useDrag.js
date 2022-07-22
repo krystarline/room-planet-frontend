@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
 import { useDrag as useGeatureDrag } from "@use-gesture/react";
 import { useAtomValue } from "jotai";
+import { useEffect } from "react";
 
 import { toolTypeAtom } from "../atoms";
 

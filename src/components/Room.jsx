@@ -1,34 +1,37 @@
-/* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-unused-vars */
-import React, { useRef, useMemo, createElement, Fragment } from "react";
+import { Debug, Physics } from "@react-three/cannon";
+import { ContactShadows, OrbitControls, Sky } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Sky, OrbitControls, ContactShadows } from "@react-three/drei";
-import { Physics, Debug } from "@react-three/cannon";
 import {
-  Selection,
   EffectComposer,
   Outline,
+  Selection,
 } from "@react-three/postprocessing";
 import { useAtom, useAtomValue } from "jotai";
+import React, { Fragment, createElement, useRef } from "react";
 import styled from "styled-components";
 
-import Bedroom from "../models/Bedroom";
-import RoomPlane from "../models/RoomPlane";
-import RoomWall from "../models/RoomWall";
-import Chair from "../models/Chair";
-import Desk from "../models/Desk";
-import Bed from "../models/Bed";
-import Pouf from "../models/Pouf";
-import LeatherChair from "../models/LeatherChair";
-import Sofa from "../models/Sofa";
-import Armchair from "../models/Armchair";
-import Whitetable from "../models/Whitetable";
-
-import RoomCanvasTools from "./RoomCanvasTools";
-import Picker from "./Picker";
 import { colorAtom, modelsAtom, toolTypeAtom } from "../atoms";
+import {
+  ArmChair,
+  Bed,
+  Bedroom,
+  Cabinet,
+  Chair,
+  Desk,
+  Hanger,
+  LeatherChair,
+  Pouf,
+  RoomPlane,
+  RoomWall,
+  Shelf,
+  Sofa,
+  Table,
+} from "../models";
+import Picker from "./Picker";
+import RoomCanvasTools from "./RoomCanvasTools";
 
 const RoomLayout = styled.div`
   height: 60vh;
@@ -63,7 +66,7 @@ function Room() {
   const furniture = [
     { component: Chair, props: { position: [0, 3, 0], showroomType: "room" } },
     {
-      component: Whitetable,
+      component: Table,
       props: { position: [0, 3, 0], showroomType: "room" },
     },
     { component: Bed, props: { position: [0, 3, 0], showroomType: "room" } },
@@ -78,8 +81,23 @@ function Room() {
       props: { position: [0, 3, 0], showroomType: "room" },
     },
     {
-      component: Armchair,
+      component: ArmChair,
       props: { position: [0, 3, 0], showroomType: "room" },
+    },
+    {
+      component: Shelf,
+      props: { position: [0, 3, 0], showroomType: "room" },
+    },
+    {
+      component: Hanger,
+      props: { position: [0, 3, 0], showroomType: "room" },
+    },
+    {
+      component: Cabinet,
+      props: {
+        position: [0, 3, 0],
+        showroomType: "room",
+      },
     },
   ];
 

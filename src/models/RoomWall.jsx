@@ -1,6 +1,6 @@
+import { usePlane } from "@react-three/cannon";
 import React from "react";
 import { DoubleSide } from "three";
-import { usePlane } from "@react-three/cannon";
 
 function RoomWall(props) {
   const [ref] = usePlane(() => ({

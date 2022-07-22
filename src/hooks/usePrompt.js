@@ -1,5 +1,6 @@
 /* eslint-disable no-alert */
 import { useCallback } from "react";
+
 import useBlock from "./useBlock";
 
 function usePrompt(message, when = true) {

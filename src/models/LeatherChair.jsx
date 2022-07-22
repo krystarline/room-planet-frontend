@@ -1,18 +1,15 @@
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import { useGLTF } from "@react-three/drei";
 import { Debug, useBox } from "@react-three/cannon";
+import { useGLTF } from "@react-three/drei";
 import { Select } from "@react-three/postprocessing";
 import { useAtomValue } from "jotai";
+import React, { useState } from "react";
 
-import { useHover, useDrag, usePaint } from "../hooks";
 import { colorItemsAtom } from "../atoms";
+import { useDrag, useHover, usePaint } from "../hooks";
 import useRotate from "../hooks/useRotate";
 
 function LeatherChair({ showroomType, position: pos, ...props }) {
-  const { nodes, materials } = useGLTF("/black_leather_chair.gltf");
+  const { nodes, materials } = useGLTF("/LeatherChair.gltf");
   const [position, setPosition] = useState(pos || [0, 0, 0]);
   const [rotation, setRotation] = useState([0, 0, 0]);
   const [ref, api] = useBox(() => ({

@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-import { styled } from "@mui/material/styles";
-
-import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import { styled } from "@mui/material/styles";
+import React from "react";
 
 const LandingLayoutRoot = styled("section")(({ theme }) => ({
   color: theme.palette.common.white,
