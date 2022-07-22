@@ -20,7 +20,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -47,7 +46,7 @@ const responsive = {
 };
 
 const ModelCarouselLayout = styled.div`
-  height: 40vh;
+  height: 70vh;
   overflow: hidden;
 `;
 
@@ -91,19 +90,30 @@ function PlanGuide() {
           >
             Let's display your room! 🎨
           </Typography>
-          {/* <Typography
-            id="modal-modal-description"
-            sx={{ mt: 2 }}
-            align="center"
-          >
-
-          </Typography> */}
           <Divider />
           <ModelCarouselLayout>
-            <Carousel responsive={responsive} infinite showDots>
-              <div>item1</div>
-              <div>item2</div>
-              <div>item3</div>
+            <Carousel responsive={responsive} showDots>
+              <div>
+                <img
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                  src="/1-render-models.gif"
+                  alt="Render Models"
+                />
+              </div>
+              <div>
+                <img
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                  src="/2-drag-and-rotate-model.gif"
+                  alt="Drag and Rotate Model"
+                />
+              </div>
+              <div>
+                <img
+                  style={{ display: "block", width: "100%", height: "100%" }}
+                  src="/3-colorpick-model.gif"
+                  alt="Colorpick Model"
+                />
+              </div>
             </Carousel>
           </ModelCarouselLayout>
         </Box>
