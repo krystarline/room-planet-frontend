@@ -23,7 +23,7 @@ function Bed({ showroomType, position: pos, ...props }) {
 
   const bindDrag = useDrag(api, position, setPosition);
   const bindRotate = useRotate(api, rotation, setRotation);
-  const bindPaint = usePaint(3);
+  const bindPaint = usePaint(2);
 
   const items = useAtomValue(colorItemsAtom);
 
@@ -41,14 +41,14 @@ function Bed({ showroomType, position: pos, ...props }) {
         receiveShadow
         geometry={nodes.Bed_Frame.geometry}
         material={materials["Bed Frame"]}
-        material-color={items[3]["Bed Frame"]}
+        material-color={items[2]["Bed Frame"]}
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Bed_Pillow.geometry}
         material={materials["Bed Pillow"]}
-        material-color={items[3]["Bed Pillow"]}
+        material-color={items[2]["Bed Pillow"]}
         position={[0, 0.65, -0.8]}
         rotation={[0.64, 0, 0]}
       />
@@ -57,7 +57,7 @@ function Bed({ showroomType, position: pos, ...props }) {
         receiveShadow
         geometry={nodes.Bed_Mattress.geometry}
         material={materials["Bed Mattress"]}
-        material-color={items[3]["Bed Mattress"]}
+        material-color={items[2]["Bed Mattress"]}
         position={[0, 0.05, 0]}
       />
     </group>
