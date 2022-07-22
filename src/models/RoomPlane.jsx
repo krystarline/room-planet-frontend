@@ -10,7 +10,6 @@ function RoomPlane({ ...props }) {
   }));
 
   return (
-    // 20, 20, transparent="true" opacity="1"
     <group ref={ref} {...props}>
       <mesh>
         <planeGeometry args={[16, 16]} />

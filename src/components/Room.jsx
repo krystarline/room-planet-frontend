@@ -4,11 +4,6 @@
 import { Debug, Physics } from "@react-three/cannon";
 import { ContactShadows, OrbitControls, Sky } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  EffectComposer,
-  Outline,
-  Selection,
-} from "@react-three/postprocessing";
 import { useAtom, useAtomValue } from "jotai";
 import React, { Fragment, createElement, useRef } from "react";
 import styled from "styled-components";
@@ -131,33 +126,16 @@ function Room() {
           far={0.8}
         />
         <Physics gravity={[0, -9.8, 0]}>
-          <Debug color="black">
-            <Bedroom position={[0, 0, 0]} rotation={[0, -Math.PI / 2, 0]} />
-            <RoomPlane
-              position={[0, 0.45, 0]}
-              rotation={[-Math.PI / 2, 0, 0]}
-            />
-            <RoomWall position={[-7.95, 4, 0]} rotation={[0, Math.PI / 2, 0]} />
-            <RoomWall position={[0, 4, -7.95]} rotation={[0, 0, 0]} />
-            {/* <RoomWall position={[8, 4, 0]} rotation={[0, Math.PI / 2, 0]} />
-            <RoomWall position={[0, 4, 8]} rotation={[0, 0, 0]} /> */}
-            <Selection>
-              {/* <EffectComposer multisampling={8} autoClear={false}>
-                <Outline
-                  blur
-                  visibleEdgeColor="white"
-                  edgeStrength={10}
-                  width={500}
-                />
-              </EffectComposer> */}
-              {furniture.map(({ component, props }, index) => (
-                <Fragment key={index}>
-                  {models[index] &&
-                    createElement(component, { type: "Dynamic", ...props })}
-                </Fragment>
-              ))}
-            </Selection>
-          </Debug>
+          <Bedroom position={[0, 0, 0]} rotation={[0, -Math.PI / 2, 0]} />
+          <RoomPlane position={[0, 0.45, 0]} rotation={[-Math.PI / 2, 0, 0]} />
+          <RoomWall position={[-7.95, 4, 0]} rotation={[0, Math.PI / 2, 0]} />
+          <RoomWall position={[0, 4, -7.95]} rotation={[0, 0, 0]} />
+          {furniture.map(({ component, props }, index) => (
+            <Fragment key={index}>
+              {models[index] &&
+                createElement(component, { type: "Dynamic", ...props })}
+            </Fragment>
+          ))}
         </Physics>
         <OrbitController />
       </Canvas>

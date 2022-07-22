@@ -23,6 +23,4 @@ function RoomWall(props) {
   );
 }
 
-// transparent="true" opacity="0"
-
 export default RoomWall;

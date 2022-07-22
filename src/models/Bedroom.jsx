@@ -111,23 +111,8 @@ function Bedroom({ ...props }) {
           material={materials.Leaves}
         />
       </group>
-      {/* <group position={[0.04, 4.3, 8]} scale={2}>
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.mesh_27.geometry}
-          material={materials.Frame}
-        />
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.mesh_27_1.geometry}
-          material={materials.Material}
-        />
-      </group> */}
     </group>
   );
 }
 
 export default Bedroom;
-// useGLTF.preload("/Another_bedroom.gltf");

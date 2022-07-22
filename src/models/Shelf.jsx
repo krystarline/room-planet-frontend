@@ -1,11 +1,10 @@
-import { Debug, useBox } from "@react-three/cannon";
+import { useBox } from "@react-three/cannon";
 import { useGLTF } from "@react-three/drei";
-import { Select } from "@react-three/postprocessing";
 import { useAtomValue } from "jotai";
 import React, { useState } from "react";
 
 import { colorItemsAtom } from "../atoms";
-import { useDrag, useHover, usePaint } from "../hooks";
+import { useDrag, usePaint } from "../hooks";
 import useRotate from "../hooks/useRotate";
 
 function Shelf({ showroomType, position: pos, ...props }) {
@@ -25,41 +24,33 @@ function Shelf({ showroomType, position: pos, ...props }) {
   const bindDrag = useDrag(api, position, setPosition);
   const bindRotate = useRotate(api, rotation, setRotation);
   const bindPaint = usePaint(8);
-  const [hovered, bindHover] = useHover();
 
   const items = useAtomValue(colorItemsAtom);
 
   return (
-    <Select enabled={hovered}>
-      <Debug color="black">
-        <group
-          ref={ref}
-          scale={1.5}
-          dispose={null}
-          {...(showroomType === "room" && bindHover())}
-          {...(showroomType === "room" && bindDrag())}
-          {...(showroomType === "room" && bindRotate())}
-          {...(showroomType === "room" && bindPaint())}
-        >
-          {/* <group position={[2.63, 0.2, 3.66]}> */}
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.mesh_7.geometry}
-            material={materials.Frame}
-            material-color={items[8].Frame}
-          />
-          <mesh
-            castShadow
-            receiveShadow
-            geometry={nodes.mesh_7_1.geometry}
-            material={materials["Pin picture.001"]}
-            material-color={items[8]["Pin picture.001"]}
-          />
-        </group>
-        {/* </group> */}
-      </Debug>
-    </Select>
+    <group
+      ref={ref}
+      scale={1.5}
+      dispose={null}
+      {...(showroomType === "room" && bindDrag())}
+      {...(showroomType === "room" && bindRotate())}
+      {...(showroomType === "room" && bindPaint())}
+    >
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.mesh_7.geometry}
+        material={materials.Frame}
+        material-color={items[8].Frame}
+      />
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.mesh_7_1.geometry}
+        material={materials["Pin picture.001"]}
+        material-color={items[8]["Pin picture.001"]}
+      />
+    </group>
   );
 }
 
